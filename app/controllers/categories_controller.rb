@@ -1,4 +1,4 @@
-class VideoController < ApplicationController
+class CategoriesController < ApplicationController
   before_filter do
     redirect_to :root if Rails.env.production?
   end
@@ -6,5 +6,9 @@ class VideoController < ApplicationController
   layout "application"
 
   def index
+  end
+
+  def show
+  	@category = Category.find(params[:id])
   end
 end
