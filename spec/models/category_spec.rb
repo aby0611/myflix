@@ -17,4 +17,6 @@ describe Category do
 
     expect(comedies.videos).to include(south_park, futurama)
   end
+
+  it { should have_many(:videos)}
 end
