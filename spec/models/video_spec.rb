@@ -1,25 +1,39 @@
 require 'spec_helper'
 
 describe Video do
-  it "saves itself" do
-    video = Video.new(title: "monk", description: "a great video!!")
-    video.save
-    expect(Video.first).to eq(video)
-  end
-
-  it "does not save a video without a title" do
-    video = Video.create(description: "a great video")
-    video.save
-    expect(Video.count).to eq(0)
-  end
-
-  it "does not save a video wothout a description" do
-    video = Video.create(title: "a good title")
-    video.save
-    expect(Video.count).to eq(0)
-  end
-
   it { should have_many(:categories)}
   it { should validate_presence_of(:title)}
   it { should validate_presence_of(:description)}
+
+  describe do
+    it "returns an empty array if there's no match" do
+      futurama = Video.create(title: "Futurama", description: "Some description")
+      back_future = Video.create(title: "Back to Future", description: "Some description")
+      expect(Video.search_by_title("hello")).to eq([])
+    end
+
+    it "returns an array of one video for an exact match" do
+      futurama = Video.create(title: "Futurama", description: "Some description")
+      back_future = Video.create(title: "Back to Future", description: "Some description")
+      expect(Video.search_by_title("Futurama")).to eq([futurama])
+    end
+
+    it "returns an array of one video for a partial match" do
+      futurama = Video.create(title: "Futurama", description: "Some description")
+      back_future = Video.create(title: "Back to Future", description: "Some description")
+      expect(Video.search_by_title("rama")).to eq([futurama])
+    end
+
+    it "returns an array of all matches ordered by created_at" do
+      futurama = Video.create(title: "Futurama", description: "Some description", created_at: 1.day.ago)
+      back_future = Video.create(title: "Back to Future", description: "Some description")
+      expect(Video.search_by_title("Futur")).to eq([back_future, futurama])
+    end
+
+    it "returns an empty array for a search with an empty string" do
+      futurama = Video.create(title: "Futurama", description: "Some description")
+      back_future = Video.create(title: "Back to Future", description: "Some description")
+      expect(Video.search_by_title("")).to eq([])
+    end
+  end
 end
