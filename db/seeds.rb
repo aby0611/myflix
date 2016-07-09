@@ -14,7 +14,7 @@ Category.create(name: "Family")   # id = 4
 Category.create(name: "Drama")    # id = 5
 
 #Videos 
-Video.create(title:"The Walking Dead", description:"Rick Grimes is a former Sheriff's deputy who has been in a coma for several months after being shot while on duty. When he wakes, he discovers that the world has been taken over by zombies, and that he seems to be the only person still alive. After returning home to discover his wife and son missing, he heads for Atlanta to search for his family. Narrowly escaping death at the hands of the zombies on arrival in Atlanta, he is aided by another survivor Glenn who takes Rick to a camp outside the town. There Rick finds his wife Lori and son Carl, along with his partner/best friend Shane and a small group of survivors who struggle to fend off the zombie hordes; as well as competing with other survivor groups who are prepared to do whatever it takes to survive", large_video_cover:"/tmp/the_walking_dead_large.jpg", small_video_cover:"/tmp/the_walking_dead.jpg")
+twd = Video.create(title:"The Walking Dead", description:"Rick Grimes is a former Sheriff's deputy who has been in a coma for several months after being shot while on duty. When he wakes, he discovers that the world has been taken over by zombies, and that he seems to be the only person still alive. After returning home to discover his wife and son missing, he heads for Atlanta to search for his family. Narrowly escaping death at the hands of the zombies on arrival in Atlanta, he is aided by another survivor Glenn who takes Rick to a camp outside the town. There Rick finds his wife Lori and son Carl, along with his partner/best friend Shane and a small group of survivors who struggle to fend off the zombie hordes; as well as competing with other survivor groups who are prepared to do whatever it takes to survive", large_video_cover:"/tmp/the_walking_dead_large.jpg", small_video_cover:"/tmp/the_walking_dead.jpg")
 
 Video.create(title:"Dexter", description:"Meet Dexter Morgan. By day he's a blood spatter pattern expert for the Miami Metro police department. But by night - he takes on an entirely different persona: serial killer. But Dexter isn't your average serial killer as he only kills people who fit a very prolific and precise \"moral code\" taught to him by his late father Harry (he didn't kill Harry, honest), and developed very thoroughly throughout each kill. While dealing with his daily activities and his boss, Sgt. Doakes, the one man who may or may not know the truth about his after-hours activities, he is given a friendly message by a guy referred to only as \"The Ice Truck Killer\" - a crime scene where there is no blood. This shocking discovery turns Dexter's world completely upside down. The Ice Truck Killer wants Dexter to play his game and Dexter is very eager to take on this cat-and-mouse chase throughout Miami.", large_video_cover:"/tmp/dexter_large.jpg", small_video_cover:"/tmp/dexter.jpg")
 
@@ -43,4 +43,9 @@ VideoCategory.create(video_id: 5, category_id: 1)
 VideoCategory.create(video_id: 5, category_id: 5)
 VideoCategory.create(video_id: 6, category_id: 2)
 VideoCategory.create(video_id: 6, category_id: 4)
+
+joanne = User.create(email:"joanne@example.com", password:"joanne", full_name: "Joanne Wu")
+Review.create(rating: 5, user: joanne, video: twd, content: "This is cool video")
+Review.create(rating: 2, user: joanne, video: twd, content: "No good")
+
 
