@@ -2,12 +2,12 @@
   .container
     .row
       .video_large_cover.col-sm-7.col-sm-offset-1
-        %img(src="http://dummyimage.com/665x375/000000/00a2ff")
+        %img(src="#{@video.large_video_cover}")
       .video_info.col-sm-3
         %header
-          %h3 Futurama
+          %h3 #{@video.title}
           %span Rating: 4.5/5.0
-        %p Pizza boy Philip J. Fry awakens in the 31st century after 1,000 years of cryogenic preservation in this animated series. After he gets a job at an interplanetary delivery service, Fry embarks on ridiculous escapades to make sense of his predicament.
+        %p #{@video.description}
         .actions
           %a.btn.btn-primary(href="") Watch Now
           %a.btn.btn-default(href="") + My Queue
@@ -15,6 +15,21 @@
 %section.reviews.container
   .row
     .col-sm-10.col-sm-offset-1
+      = bootstrap_form_for [@video, Review.new] do |f|
+        %fieldset
+          .form-group
+            %label Rate this video
+            .row
+              .col-sm-3
+                = f.select :rating, select_rating_options
+          .form-group
+            %label Write Review
+            .row
+              .col-sm-8
+                = f.text_area :content, rows: 6
+        %fieldset.form-group.actions.clearfix
+          %input(type="submit" value="Submit" class="btn")
+          = link_to "Cancel", @video
       %header
         %h3 User Reviews (#{@reviews.count})
       %ul
