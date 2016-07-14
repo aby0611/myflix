@@ -9,7 +9,7 @@ Myflix::Application.routes.draw do
     resources :reviews, only: [:create]
   end
   resources :categories, only: [:show]
-  resources :queue_items, only: [:create]
+  resources :queue_items, only: [:create, :destroy]
 
   get "register", to: "users#new"
   get "sign_in", to: "sessions#new"
