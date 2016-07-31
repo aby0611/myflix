@@ -6,7 +6,7 @@ class QueueItem < ActiveRecord::Base
 
   validates_numericality_of :position, {only_integer: true}
 
-def rating
+  def rating
     review.rating if review
   end
 
