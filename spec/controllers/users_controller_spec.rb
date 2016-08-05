@@ -40,6 +40,8 @@ describe UsersController do
     end
 
     context "sending emails" do
+      after {ActionMailer::Base.deliveries.clear}
+
       it "sends out email to the user with valid inputs" do
         post :create, user: {email: "steven@example.com", password: "password", full_name: "Steven Huang"}
         expect(ActionMailer::Base.deliveries.last.to).to eq(["steven@example.com"])
