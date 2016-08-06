@@ -1,7 +1,23 @@
 class PasswordResetsController < ApplicationController
   def show
     user = User.where(token: params[:id]).first
-    #require "pry"; binding.pry
-    redirect_to expired_token_path unless user
+    if user
+      @token = user.token
+    else
+      redirect_to expired_token_path unless user
+    end
+  end
+
+  def create
+    user = User.where(token: params[:token]).first
+    if user 
+      user.password = params[:password]
+      user.generate_token
+      user.save
+      flash[:success] = "Your password has been reset. Please sign in."
+      redirect_to sign_in_path
+    else
+      redirect_to expired_token_path
+    end
   end
 end
