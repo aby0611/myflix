@@ -1,0 +1,6 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p You are invite by #{@invitation.inviter.full_name}
+    %p= @invitation.message
+    %p= link_to "Accept the invitation", "#"
