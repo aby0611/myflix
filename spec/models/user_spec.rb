@@ -35,11 +35,26 @@ describe User do
       relationship = Fabricate(:relationship, follower: alice, leader: bob)
       expect(alice.follows?(bob)).to be_truthy
     end
+
     it "returns false if this user doesn't follow the other user" do
       alice = Fabricate(:user)
       bob = Fabricate(:user)
       expect(alice.follows?(bob)).to be_falsey
     end
+  end
 
+  describe "#follow" do
+    it "follows anohter user" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      alice.follow(bob)
+      expect(alice.follows?(bob)).to be_truthy
+    end
+
+    it "does not follow on self" do
+      alice = Fabricate(:user)
+      alice.follow(alice)
+      expect(alice.follows?(alice)).to be_falsey
+    end
   end
 end

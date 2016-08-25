@@ -20,5 +20,7 @@ feature "User reset password" do
     click_button "Sign in"
 
     page.should have_content(steven.full_name)
+
+    clear_emails
   end
 end

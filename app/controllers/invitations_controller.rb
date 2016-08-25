@@ -6,11 +6,11 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    invitation = Invitation.new(invite_params)
+    @invitation = Invitation.new(invite_params)
 
-    if invitation.save
-      AppMailer.send_invitation(invitation).deliver
-      flash[:success] = "Send your invitation to #{invitation.recipient_name}"
+    if @invitation.save
+      AppMailer.send_invitation(@invitation).deliver
+      flash[:success] = "Send your invitation to #{@invitation.recipient_name}"
       redirect_to new_invitation_path
     else
       flash[:error] = "Please check your input."

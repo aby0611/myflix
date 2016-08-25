@@ -3,4 +3,4 @@
   %body
     %p You are invite by #{@invitation.inviter.full_name}
     %p= @invitation.message
-    %p= link_to "Accept the invitation", "#"
+    %p= link_to "Accept the invitation", register_with_token_url(@invitation.token)
