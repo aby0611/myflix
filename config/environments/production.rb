@@ -31,4 +31,10 @@ Myflix::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
 
   config.action_mailer.default_url_options = { host: 'steven-flix.herokuapp.com' }
+
+  config.action_dispatch.show_exceptions = false # For sentry
+  Raven.configure do |config|
+    config.dsn = 'https://36b6a9e41e4c417f8c77fffa18156a38:365688497c8243a99f72fe6bca7d0dda@sentry.io/96545'
+    config.environments = ['staging', 'production']
+  end
 end
