@@ -14,6 +14,7 @@ gem 'bootstrap_form'
 gem 'bcrypt'
 gem 'fabrication'
 gem 'faker'
+gem "sentry-raven"
 
 group :development do
   gem 'thin'
@@ -39,6 +40,5 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem "sentry-raven"
 end
 
