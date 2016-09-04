@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.2p95
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app steven-flix
+      - heroku pg:backups capture --app steven-flix
+      - git push git@heroku.com:steven-flix.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app steven-flix
+      - heroku maintenance:off --app steven-flix
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app dry-forest-75758
+      - git push git@heroku.com:dry-forest-75758.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app dry-forest-75758
+      - heroku maintenance:off --app dry-forest-75758
