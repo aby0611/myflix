@@ -6,6 +6,17 @@ class Admin::VideosController < ApplicationController
     @video = Video.new
   end
 
+  def create
+    @video = Video.new(params.require(:video).permit(:title, :category_ids, :description))
+    if @video.save
+      flash[:success] = "Your video had been created successfully"
+      redirect_to new_admin_video_path
+    else
+      flash[:error] = "Video create fail"
+      render :new
+    end
+  end
+
   private
 
   def require_admin
