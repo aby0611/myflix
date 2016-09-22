@@ -7,7 +7,7 @@ class Admin::VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(params.require(:video).permit(:title, :category_ids, :description, :large_cover, :small_cover))
+    @video = Video.new(video_param)
     if @video.save
       flash[:success] = "Your video had been created successfully"
       redirect_to new_admin_video_path
@@ -24,5 +24,9 @@ class Admin::VideosController < ApplicationController
       flash[:error] = "You are not authorized to do that."
       redirect_to home_path unless current_user.admin?
     end
+  end
+
+  def video_param
+    params.require(:video).permit(:title, :category_ids, :description, :large_cover, :small_cover, :video_url)
   end
 end
