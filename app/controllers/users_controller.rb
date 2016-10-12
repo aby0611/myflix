@@ -16,7 +16,6 @@ class UsersController < ApplicationController
         :source => params[:stripeToken],
         :description => "Sign up charge for #{@user.email}"
       )
-
       AppMailer.send_welcome_email(@user).deliver
       redirect_to sign_in_path
     else
