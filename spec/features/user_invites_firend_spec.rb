@@ -4,6 +4,7 @@ feature "User invites friend" do
   scenario "User successfully invites friends and invitation is accepted", { js: true, vcr: true } do
     alice = Fabricate(:user)
     sign_in(alice)
+    sleep 1 # For login time is too slow
     
     invite_a_friend
     friend_accept_invitation
@@ -33,8 +34,9 @@ feature "User invites friend" do
     fill_in "Credit Card Number", with: "4242424242424242"
     fill_in "Security Code", with: "123"
     select "7 - July", from: "date_month"
-    select "2016", from: "date_year"
+    select "2017", from: "date_year"
     click_button "Sign Up"
+    sleep 3 # Wait stripe server reply
   end
 
   def friend_sign_in
