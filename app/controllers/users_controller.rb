@@ -10,12 +10,11 @@ class UsersController < ApplicationController
     if @user.save
       handle_invitation
       Stripe.api_key = ENV['stripe_api_key']
-      Stripe::Charge.create(
+      StripeWrapper::Charge.create(
         :amount => 999,
-        :currency => "usd",
-        :source => params[:stripeToken],
+        :card => params[:stripeToken],
         :description => "Sign up charge for #{@user.email}"
-      )
+        )
       AppMailer.send_welcome_email(@user).deliver
       redirect_to sign_in_path
     else

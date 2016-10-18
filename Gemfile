@@ -42,6 +42,7 @@ group :test do
   gem 'launchy'
   gem 'capybara-email'
   gem 'webmock'
+  gem 'selenium-webdriver'
 end
 
 group :production do
