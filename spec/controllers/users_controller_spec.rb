@@ -72,6 +72,10 @@ describe UsersController do
     end
 
     context "invalid personal info" do
+      before {
+        ActionMailer::Base.deliveries.clear
+      }
+
       it "doesn't create user" do
         post :create, user: {email: "steven@example.com"}
         expect(User.count).to eq(0)
@@ -102,7 +106,6 @@ describe UsersController do
       let(:charge) { double(:charge, successful?: true) }
       before {
         StripeWrapper::Charge.should_receive(:create).and_return(charge)
-        ActionMailer::Base.deliveries.clear
       }
       after {ActionMailer::Base.deliveries.clear}
 
