@@ -22,6 +22,9 @@ gem 'stripe'
 gem 'figaro'
 gem 'draper'
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 group :development do
   gem 'thin'
   gem "better_errors"
