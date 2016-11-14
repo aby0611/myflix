@@ -48,7 +48,11 @@ module StripeWrapper
     end
 
     def successful?
-      @response.present?
+      response.present?
+    end
+
+    def customer_token
+      response.id
     end
   end
 end
