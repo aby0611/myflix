@@ -7,5 +7,4 @@ StripeEvent.configure do |events|
     reference_id = event.data.object.id
     Payment.create(user: user, amount: amount, reference_id: reference_id)
   end
-
 end

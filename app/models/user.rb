@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Tokenable
+  attr_accessor :customer_token
   validates_presence_of :email, :password, :full_name
   validates_uniqueness_of :email
 
