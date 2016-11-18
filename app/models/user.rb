@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   include Tokenable
-  attr_accessor :customer_token
   validates_presence_of :email, :password, :full_name
   validates_uniqueness_of :email
 
@@ -31,5 +30,9 @@ class User < ActiveRecord::Base
 
   def can_follow?(another_user)
     !(self.follows?(another_user) || self == another_user)
+  end
+
+  def deactivate!
+    update_column(:active, false)
   end
 end
