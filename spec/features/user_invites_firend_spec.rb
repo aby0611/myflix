@@ -36,7 +36,7 @@ feature "User invites friend" do
     select "7 - July", from: "date_month"
     select "2020", from: "date_year"
     click_button "Sign Up"
-    sleep 3 # Wait stripe server reply
+    sleep 10 # Wait stripe server reply
   end
 
   def friend_sign_in
