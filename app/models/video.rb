@@ -22,4 +22,8 @@ class Video < ActiveRecord::Base
   def self.rating
     video
   end
+
+  def as_indexed_json(options={})
+    as_json(only: [:title])
+  end
 end

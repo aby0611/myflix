@@ -86,4 +86,10 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.before(:each, elasticsearch: true) do
+    Video.__elasticsearch__.create_index! force: true
+  end
+
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 end
