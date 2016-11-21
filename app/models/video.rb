@@ -1,4 +1,8 @@
 class Video < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  index_name ["myfilx", Rails.env].join('_')
+
   has_many :video_categories
   has_many :reviews, -> { order("created_at DESC") }
   has_many :categories, ->{ order(:name) }, through: :video_categories
