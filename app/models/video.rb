@@ -25,8 +25,7 @@ class Video < ActiveRecord::Base
 
   def average_rating
     reviews.average(:rating).to_f.round(1) if reviews.any?
-  end
-
+  end   
   def self.search(query, options={})
     search_definition = {
       query: {
